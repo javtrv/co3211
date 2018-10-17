@@ -9,3 +9,5 @@ function inv = inversa(A)
         e(k) = 1;
         x = sistemaLU(A,e);
         inv = [inv,x];
+    end
+endfunction
