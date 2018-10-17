@@ -1,6 +1,6 @@
 function T = toeplitz(V)
   
-    n = length(V)
+    n = length(V);
     largo = n - ((n/2)-0.5);
     T = 0*ones(largo,largo)
     
