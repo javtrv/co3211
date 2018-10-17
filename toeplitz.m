@@ -2,7 +2,7 @@ function T = toeplitz(V)
   
     n = length(V);
     largo = n - ((n/2)-0.5);
-    T = 0*ones(largo,largo)
+    T = 0*ones(largo,largo);
     
     for k=1:1:largo
       for j=0:1:largo-k
