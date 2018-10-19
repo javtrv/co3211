@@ -115,7 +115,7 @@ printf("\n")
 display("Error relativo para T1 con Gauss sin pivoteo")
 
 ea= x1-x;
-erelativo = norm(ea)/norm(x1)
+erelativo = norm(ea,inf)/norm(x1,inf)
 
 
 
@@ -130,7 +130,7 @@ printf("\n")
 display("Error relativo para T1 con Gauss con pivoteo")
 
 ea= x1-x;
-erelativo = norm(ea)/norm(x1)
+erelativo = norm(ea,inf)/norm(x1,inf)
 
 
 
@@ -144,7 +144,7 @@ printf("\n")
 display("Error relativo para T1 con LU")
 
 ea= x1-x;
-erelativo = norm(ea)/norm(x1)
+erelativo = norm(ea,inf)/norm(x1,inf)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -162,7 +162,7 @@ printf("\n")
 display("Error relativo para T2 con Gauss sin pivoteo")
 
 ea= x2-x;
-erelativo = norm(ea)/norm(x2)
+erelativo = norm(ea,inf)/norm(x2,inf)
 
 
 
@@ -177,7 +177,7 @@ printf("\n")
 display("Error relativo para T2 con Gauss con pivoteo")
 
 ea= x2-x;
-erelativo = norm(ea)/norm(x2)
+erelativo = norm(ea,inf)/norm(x2,inf)
 
 
 
@@ -191,7 +191,7 @@ printf("\n")
 display("Error relativo para T2 con LU")
 
 ea= x2-x;
-erelativo = norm(ea)/norm(x2)
+erelativo = norm(ea,inf)/norm(x2,inf)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,7 +210,7 @@ printf("\n")
 display("Error relativo para T3 con Gauss sin pivoteo")
 
 ea= x3-x;
-erelativo = norm(ea)/norm(x3)
+erelativo = norm(ea,inf)/norm(x3,inf)
 
 
 
@@ -225,7 +225,7 @@ printf("\n")
 display("Error relativo para T3 con Gauss con pivoteo")
 
 ea= x3-x;
-erelativo = norm(ea)/norm(x3)
+erelativo = norm(ea,inf)/norm(x3,inf)
 
 
 
@@ -240,7 +240,238 @@ printf("\n")
 display("Error relativo para T3 con LU")
 
 ea= x3-x;
-erelativo = norm(ea)/norm(x3)
+erelativo = norm(ea,inf)/norm(x3,inf)
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% Ejercicio 3
+printf("\n")
+display("Ejercicio 3")
+
+% Resolucion de un sistema de ecuaciones Tx=b con T matriz de
+% vander
+
+% 1era matriz de vander
+
+Ta = vander([0.5, 0.6, 0.7, 0.8, 0.9]);
+
+xa = ones(5,1);
+
+b1 = Ta*xa;
+
+% 2da matriz de vander
+
+
+Tb = vander([0.5, 0.6, 7, 8, 91013]);
+
+xb = ones(5,1);
+
+b2 = Tb*xb;
+
+
+% Parte A
+
+% Autovalores de T1
+display("Autovalores de matriz de Vander 1 generada")
+
+eig(Ta)
+
+% Determinante de T1
+printf("\n")
+display("Determinante")
+det(Ta)
+
+% Numero de condicion de T1
+printf("\n")
+display("Numero de condicion")
+cond(Ta,inf)
+
+% Autovalores de T2
+display("Autovalores de matriz de Vander 2 generada")
+
+eig(Tb)
+
+% Determinante de T2
+printf("\n")
+display("Determinante")
+det(Tb)
+
+% Numero de condicion de T2
+printf("\n")
+display("Numero de condicion")
+cond(Tb,inf)
+
+
+% Parte B
+
+% Resolucion de sistemas de ecuaciones para T1
+
+% Eliminacion de Gauss sin pivoteo
+
+[A,b] = gauss(Ta,b1);
+
+printf("\n")
+display("Solucion del sistema para T1 con Gauss sin pivoteo")
+x = sust_atras(A,b)
+
+printf("\n")
+display("Error relativo para T1 con Gauss sin pivoteo")
+
+ea= xa-x;
+erelativo = norm(ea,inf)/norm(xa,inf)
+
+
+
+% Eliminacion de Gauss con pivoteo
+[A,b] = gauss_pivote(Ta,b1);
+
+printf("\n")
+display("Solucion del sistema para T1 con Gauss con pivoteo")
+x = sust_atras(A,b)
+
+printf("\n")
+display("Error relativo para T1 con Gauss con pivoteo")
+
+ea= xa-x;
+erelativo = norm(ea,inf)/norm(xa,inf)
+
+
+
+% LU
+printf("\n")
+display("Solucion del sistema para T1 con LU")
+x = sistemaLU(Ta,b1)
+
+
+printf("\n")
+display("Error relativo para T1 con LU")
+
+ea= xa-x;
+erelativo = norm(ea,inf)/norm(xa,inf)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Resolucion de sistemas de ecuaciones para T2
+
+% Eliminacion de Gauss sin pivoteo
+
+[A,b] = gauss(Tb,b2);
+
+printf("\n")
+display("Solucion del sistema para T2 con Gauss sin pivoteo")
+x = sust_atras(A,b)
+
+printf("\n")
+display("Error relativo para T2 con Gauss sin pivoteo")
+
+ea= xb-x;
+erelativo = norm(ea,inf)/norm(xb,inf)
+
+
+
+% Eliminacion de Gauss con pivoteo
+[A,b] = gauss_pivote(Tb,b2);
+
+printf("\n")
+display("Solucion del sistema para T2 con Gauss con pivoteo")
+x = sust_atras(A,b)
+
+printf("\n")
+display("Error relativo para T2 con Gauss con pivoteo")
+
+ea= xb-x;
+erelativo = norm(ea,inf)/norm(xb,inf)
+
+
+
+% LU
+printf("\n")
+display("Solucion del sistema para T2 con LU")
+x = sistemaLU(Tb,b2)
+
+
+printf("\n")
+display("Error relativo para T2 con LU")
+
+ea= xb-x;
+erelativo = norm(ea,inf)/norm(xb,inf)
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ejercicio 4
+printf("\n")
+display("Ejercicio 4")
+
+% Calculamos inversa de T1
+printf("\n")
+display("Error abdoluto de T1")
+
+inv = inversa_pro(T1);
+identidad =T1*inv;
+
+ea = identidad - eye(m1,m1);
+
+norm(ea,inf)
+
+% Calculamos inversa de T2
+printf("\n")
+display("Error abdoluto de T2")
+
+inv = inversa_pro(T2);
+identidad =T2*inv;
+
+ea = identidad - eye(m2,m2);
+
+norm(ea,inf)
+
+% Calculamos inversa de T3
+printf("\n")
+display("Error abdoluto de T3")
+
+inv = inversa_pro(T3);
+identidad =T3*inv;
+
+ea = identidad - eye(m3,m3);
+
+norm(ea,inf)
+
+% Calculamos inversa de Ta
+printf("\n")
+display("Error abdoluto de Ta")
+
+inv = inversa_pro(Ta);
+identidad =Ta*inv;
+
+ea = identidad - eye(5,5);
+
+norm(ea,inf)
+
+% Calculamos inversa de Tb
+printf("\n")
+display("Error abdoluto de Tb")
+
+inv = inversa_pro(Tb);
+identidad =Tb*inv;
+
+ea = identidad - eye(5,5);
+
+norm(ea,inf)
+
+
+
+
+
+
+
 
 
 
