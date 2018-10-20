@@ -1,4 +1,4 @@
-function inv = inversa_pro(A)
+function inv = inversa(A)
 
     n = length(A);
     Lu = LU(A);
